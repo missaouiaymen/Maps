@@ -1,0 +1,30 @@
+
+
+{% extends "FSPaysBundle::layout.html.twig" %}
+
+{% block title %}
+    Détaille de pays - {{ parent() }}
+{% endblock %}
+
+{% block fscontinent_body %}
+<h2>Bravoo !!!</h2>
+    <h3>  Continent {{ continent.nom }}</h3>
+    qui a comme population
+     {{ continent.population }}, et {{ continent.nbPays }} pays a été ajoutée avec succée
+
+    <p>
+        <a href="{{ path('fs_pays_home') }}" class="btn btn-default">
+            <i class="glyphicon glyphicon-chevron-left"></i>
+            Retour à la liste
+        </a>
+        <a href="{{ path('fs_pays_editcontinent', {'id': continent.id}) }}" class="btn btn-default">
+            <i class="glyphicon glyphicon-edit"></i>
+            Modifier
+        </a>
+        <a href="{{ path('fs_pays_deletecontinent', {'id': continent.id}) }}" class="btn btn-danger">
+            <i class="glyphicon glyphicon-trash"></i>
+            Supprimer
+        </a>
+    </p>
+
+{% endblock %}

@@ -1,0 +1,43 @@
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-xs-3">
+                    Add Or Edit Continent
+                </div>
+
+            </div>
+        </div>
+        <a href="#">
+            <div class="panel-footer">
+                <span class="pull-left">
+                     {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+
+                    {# Les erreurs générales du formulaire. #}
+                    {{ form_errors(form) }}
+
+                    <div class="form-group">
+        {# Génération du label. #}
+                          {{ form_label(form.nom, "NAME OF CONTINENT", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+                          {# Affichage des erreurs pour ce champ précis. #}
+                          {{ form_errors(form.nom) }}
+                          <div class="col-sm-10">
+            {# Génération de l'input. #}
+                              {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+                    {# Idem pour un autre champ. #}
+
+                    {# Pour le bouton, pas de label ni d'erreur, on affiche juste le widget #}
+                    {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+
+                    {{ form_rest(form) }}
+
+                    {# Fermeture de la balise <form> du formulaire HTML #}
+                    {{ form_end(form) }}
+                </span>
+
+                <div class="clearfix"></div>
+            </div>
+        </a>
+    </div>

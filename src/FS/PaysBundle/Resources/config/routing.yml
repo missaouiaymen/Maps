@@ -1,0 +1,77 @@
+fs_pays_home:
+    path: /{page}
+    defaults:
+        _controller: FSPaysBundle:Continent:index
+        page: 1
+    requirements:
+        page: \d*
+fs_home:
+    path: /home
+    defaults:
+        _controller: FSPaysBundle:Default:home
+
+fs_pays_continentlist:
+    path: continent/continentlist
+    defaults:
+        _controller: FSPaysBundle:Continent:continentlist
+    requirements:
+            page: \d*
+
+fs_pays_viewcontinent:
+    path: /continent/{id}
+    defaults:
+        _controller: FSPaysBundle:Continent:viewcontinent
+    requirements:
+         id: \d+
+fs_pays_addcontinent:
+    path: continent/add
+    defaults:
+        _controller: FSPaysBundle:Continent:add
+
+fs_pays_editcontinent:
+    path: continent/edit/{id}
+    defaults:
+        _controller: FSPaysBundle:Continent:edit
+    requirements:
+        id: \d+
+
+fs_pays_deletecontinent:
+    path: continent/delete/{id}
+    defaults:
+        _controller: FSPaysBundle:Continent:delete
+    requirements:
+        id: \d+
+
+
+fs_pays_countrylist:
+    path: /countrylist
+    defaults:
+        _controller: FSPaysBundle:Pays:countrylist
+    requirements:
+        page: \d*
+
+fs_pays_viewcountry:
+    path: /country/{id}
+    defaults:
+        _controller: FSPaysBundle:Pays:view
+    requirements:
+         id: \d+
+
+fs_pays_addcountry:
+    path: country/add
+    defaults:
+        _controller: FSPaysBundle:Pays:add
+
+fs_pays_editcountry:
+    path: country/edit/{id}
+    defaults:
+        _controller: FSPaysBundle:Pays:edit
+    requirements:
+        id: \d+
+
+fs_pays_deletecountry:
+    path: country/delete/{id}
+    defaults:
+        _controller: FSPaysBundle:Pays:deletepays
+    requirements:
+        id: \d+

@@ -1,0 +1,21 @@
+
+{% extends "FSPaysBundle::layout.html.twig" %}
+
+{% block title %}
+    Modification - {{ parent() }}
+{% endblock %}
+
+{% block fscontinent_body %}
+
+    <h2>Modifier </h2>
+
+    {{ include("FSPaysBundle:Continent:form.html.twig") }}
+
+
+        <a href="{{ path('fs_pays_view', {'id': continent.id}) }}" class="btn btn-default">
+            <i class="glyphicon glyphicon-chevron-left"></i>
+            Retour
+        </a>
+
+
+{% endblock %}

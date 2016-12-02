@@ -1,0 +1,52 @@
+
+{% extends "FSPaysBundle::layout.html.twig" %}
+
+{% block title %}
+    Liste des Continent - {{ parent() }}
+{% endblock %}
+
+{% block fscontinent_body %}
+    <div class="panel-heading">
+        <div class="panel-title">
+            <div class="row">
+                <div class="col-md-6">
+                   <h1> List Of Continents</h1>
+                </div>
+
+                <div class="col-md-6">
+                    <a href="{{ path('fs_pays_addcontinent') }}" class="btn btn-info pull-right"> ADD Continent</a></div>
+                </div>
+            </div>
+
+        <div class="panel-body">
+
+            <table class="table table-striped" id="dataTables-example">
+                <thead align="center">
+                <th>NAME</th>
+                <th>POPULATION</th>
+                <th>NUMBER OF COUNTRIES</th>
+                <th>ACTIONS</th>
+                </thead>
+                <tbody align="center">
+                {% for continent in listContinent %}
+                    <tr class="{% if loop.index is divisibleby(2) %}odd{% else %}even{% endif %}">
+                        <td col>{{ continent.nom }}</td>
+                        <td>{{ continent.population }}</td>
+                        <td>{{ continent.nbpays }}</td>
+                        <td>
+                            <a href="{{ path('fs_pays_editcontinent',{id : continent.id}) }}"><p class="fa fa-edit"></p> </a>
+                            <a href="{{ path('fs_pays_deletecontinent',{id : continent.id}) }}"><p class="glyphicon glyphicon-remove"> </p></a>
+                            <a href="{{ path('fs_pays_addcountry') }}"><p class="glyphicon glyphicon-plus-sign"></p> </a>
+                        </td>
+                    </tr>
+
+                {% else %}
+                    <tr>
+                        <td>Pas (encore !) continent enregistrée</td>
+                    </tr>
+                {% endfor%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

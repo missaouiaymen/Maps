@@ -1,0 +1,17 @@
+
+
+{% extends "::layout.html.twig" %}
+
+{% block title %}
+    Pays - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+    {# On définit un nouveau bloc, que les vues du bundle pourront remplir #}
+    {% block fscontinent_body %}
+    {% endblock %}
+    {% block fspays_body %}
+    {% endblock %}
+
+{% endblock %}
