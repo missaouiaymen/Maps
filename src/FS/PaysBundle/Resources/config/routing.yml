@@ -72,6 +72,6 @@ fs_pays_editcountry:
 fs_pays_deletecountry:
     path: country/delete/{id}
     defaults:
-        _controller: FSPaysBundle:Pays:deletepays
+        _controller: FSPaysBundle:Pays:delete
     requirements:
         id: \d+

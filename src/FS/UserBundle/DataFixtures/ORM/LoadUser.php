@@ -12,15 +12,15 @@ class LoadUser implements FixtureInterface
     public function load(ObjectManager $manager)
     {
         // Les noms d'utilisateurs à créer
-        $listNames = array('Alexandre', 'Marine', 'Anna');
+        $listNames = array('admin', 'user', 'anna');
 
         foreach ($listNames as $name) {
             // On crée l'utilisateur
             $user = new User;
 
             // Le nom d'utilisateur et le mot de passe sont identiques pour l'instant
-            $user->setUsername($name);
-            $user->setPassword($name);
+            $user->setUsername($name)->setEmail($name.'@gmail.com');
+            $user->setPlainPassword($name)->setEnabled(1);
 
             // On ne se sert pas du sel pour l'instant
             $user->setSalt('');

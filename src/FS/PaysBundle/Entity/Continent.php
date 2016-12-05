@@ -63,16 +63,20 @@ class Continent
     /**
      *
      */
-    public function increasePopulation()
+    public function increasePopulation($countryPopulation)
     {
-        $this->population++;
+        $this->population+=$countryPopulation;
     }
 
-    public function decreasePopulation()
+    public function decreasePopulation($countryPopulation)
     {
-        $this->population--;
+        $this->population-=$countryPopulation;
     }
 
+     public  function updatePopulation($countryPopulation)
+     {
+         $this->population+=$countryPopulation;
+     }
 
     public  function __construct()
     {

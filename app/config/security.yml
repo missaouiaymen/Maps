@@ -24,6 +24,9 @@ security:
         main_login:
             pattern: ^/login$
             anonymous: true
+        register:
+            pattern: ^/register/$
+            anonymous: true
 
         main:
             pattern: ^/
@@ -49,5 +52,5 @@ security:
         - {path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY}
         - {path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY}
         - {path: ^/registring, role: IS_AUTHENTICATED_ANONYMOUSLY}
-        - { path: ^/admin, roles: ROLE_ADMIN}
+        - {path: ^/admin, roles: ROLE_ADMIN}
         #-{path:^/login, roles: IS_AUTHENTICATED_AMONYMOUSLY, require_channel:https}

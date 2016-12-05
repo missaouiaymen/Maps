@@ -30,8 +30,6 @@ class PaysController extends Controller
             throw new NotFoundHttpException('Page "'.$page.'" inexistante.');
         }
 
-
-
         $listContinent = $this->getDoctrine()
             ->getRepository('FSPaysBundle:Pays')
             ->findAll();
@@ -41,17 +39,26 @@ class PaysController extends Controller
             'listContinent' => $listContinent,
         ));
     }
-
-    public function viewAction($id)
+    public function listAction(Request $request)
     {
-        $pays = $this->getDoctrine()
-            ->getRepository('FSPaysBundle:Pays')
-            ->find($id);
 
-        return $this->render("FSPaysBundle:Pays:view.html.twig", array(
-            'pays' => $pays,
-        ));
+        $em = $this->get('doctrine.orm.entity_manager');
+        $dql = "SELECT a FROM FSPaysBundle:Pays a";
+        $query = $em->createQuery($dql);
+
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query,
+            $request->query->get('page', 1)/*page number*/,
+            10/*limit per page*/
+        );
+
+// parameters to template
+        return $this->render('FSPaysBundle:Pays:list.html.twig', array('pagination' => $pagination));
+
     }
+
+
 
     public function addAction(Request $request)
     {
@@ -77,15 +84,14 @@ class PaysController extends Controller
 
     public function editAction(Pays $pays,Request $request)
     {
-
+        $em = $this->getDoctrine()->getManager();
         $form = $this->createForm(PaysType::class, $pays);
         if ($request->getMethod() == 'POST') {
+            $pays->setOldPopulation($pays->getPopulation());
             $form->handleRequest($request);
+            var_dump($pays->getPopulation());
             if ($form->isValid()) {
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($pays);
                 $em->flush();
-
                 $request->getSession()->getFlashBag()->add('notice', 'pays bien  enregistrée');
                 return $this->redirectToRoute('fs_pays_viewcountry', array('id' => $pays->getId()));
             }
@@ -125,17 +131,13 @@ class PaysController extends Controller
         ));
     }
 
-    public function countrylistAction()
+    public function countrylistAction(Request $request)
     {
 
-        $ListPays = $this->getDoctrine()
-            ->getRepository('FSPaysBundle:Pays')
-            ->findAll();
-
-
-        return $this->render("FSPaysBundle:Pays:countrylis.html.twig", array(
-            'ListPays' => $ListPays,
-        ));
+     $posts = $this->getDoctrine()->getRepository('FSPaysBundle:Pays')->getPays($request->get('first_result', 5));
+        return $this->render('FSPaysBundle:pays:countrylis.html.twig', [
+            'posts' => $posts
+        ]);
     }
 
         }

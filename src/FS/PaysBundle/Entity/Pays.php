@@ -40,6 +40,10 @@ class Pays
      * @ORM\Column(name="population", type="integer", unique=true)
      */
     private $population;
+
+
+    private  $oldPopulation ;
+
     /**
      * Get id
      *
@@ -138,19 +142,28 @@ class Pays
     {
         $this->getContinent()->decreaseContinent();
     }
+
     /**
      * @ORM\PrePersist
      */
-    public function increasePopulation()
+    public function increaseContinentPopulation()
     {
-        $this->getContinent()->increasePopulation();
+        $this->getContinent()->increasePopulation($this->population);
     }
+
     /**
      * @ORM\PreRemove
      */
-    public function decreasePopulation()
-    {
-        $this->getContinent()->decreasePopulation();
+    public function decreaseContinentPopulation(){
+        $this->getContinent()->decreasePopulation($this->population);
+    }
+
+    public function getOldPopulation(){
+        return $this->oldPopulation;
+    }
+
+    public  function setOldPopulation($pop){
+        $this->oldPopulation = $pop;
     }
 }
 
