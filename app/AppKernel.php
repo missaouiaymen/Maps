@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new FS\PaysBundle\FSPaysBundle(),
             new FS\UserBundle\FSUserBundle(),
             new FOS\UserBundle\FOSUserBundle(),
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
 
         ];
 

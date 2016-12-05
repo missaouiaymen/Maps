@@ -15,7 +15,7 @@ class ContinentType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nom')->add('population')->add('nbPays')->add('save',SubmitType::class)        ;
+        $builder->add('nom')->add('save',SubmitType::class)        ;
     }
     
     /**

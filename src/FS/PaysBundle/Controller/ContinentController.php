@@ -93,7 +93,7 @@ class ContinentController extends Controller
                 return $this->redirectToRoute('fs_pays_viewcontinent', array('id' => $continent->getId()));
             }
         }
-        return $this->render('FSPaysBundle:Continent:form.html.twig',
+        return $this->render('FSPaysBundle:Continent:edit.html.twig',
             array('form' => $form->createView(),'id'=> $continent->getId()));
     }
 

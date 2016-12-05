@@ -14,6 +14,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Doctrine\Common\EventSubscriber;
+use Knp\Component\Pager\Pagination\PaginationInterface;
+use Knp\Component\Pager\Paginator;
 
 
 /**
@@ -39,26 +41,37 @@ class PaysController extends Controller
             'listContinent' => $listContinent,
         ));
     }
-    public function listAction(Request $request)
+    public function ListAction($page)
     {
-
-        $em = $this->get('doctrine.orm.entity_manager');
-        $dql = "SELECT a FROM FSPaysBundle:Pays a";
-        $query = $em->createQuery($dql);
-
-        $paginator = $this->get('knp_paginator');
-        $pagination = $paginator->paginate(
-            $query,
-            $request->query->get('page', 1)/*page number*/,
-            10/*limit per page*/
+        $maxPays = $this->container->getParameter('max_pays_per_page');
+        $pays_count = $this->getDoctrine()
+            ->getRepository('FSPaysBundle:Pays')
+            ->countPublishedTotal();
+        $pagination = array(
+            'page' => $page,
+            'route' => 'article_list',
+            'pages_count' => ceil($pays_count / $maxPays),
+            'route_params' => array()
         );
 
-// parameters to template
-        return $this->render('FSPaysBundle:Pays:list.html.twig', array('pagination' => $pagination));
+        $pays = $this->getDoctrine()->getRepository('FSPaysBundle:Pays')
+            ->getList($page, $maxPays);
 
+        return $this->render('FSPaysBundle:Pays:list.html.twig', array(
+            'pays' => $pays,
+            'pagination' => $pagination
+        ));
     }
+    public function viewAction($id)
+    {
+        $pays = $this->getDoctrine()
+            ->getRepository('FSPaysBundle:Pays')
+            ->find($id);
 
-
+        return $this->render("FSPaysBundle:Pays:view.html.twig", array(
+            'pays' => $pays,
+        ));
+    }
 
     public function addAction(Request $request)
     {
@@ -116,28 +129,23 @@ class PaysController extends Controller
         return new Response('Supression avec succée!');
     }
 
-    public function menuAction($limit)
-    {
 
-        $listPays = array(
-            array('id' => 2, 'nom' => 'France'),
-            array('id' => 5, 'nom' => 'Algerie'),
-            array('id' => 9, 'nom' => 'Serbie')
-        );
-
-        return $this->render('FSPaysBundle:Pays:menu.html.twig', array(
-
-            'listPays' => $listPays
-        ));
-    }
 
     public function countrylistAction(Request $request)
     {
+         $em=$this->getDoctrine()->getManager();
+        $ListPays = $em->getRepository('FSPaysBundle:Pays')
+            ->findAll();
 
-     $posts = $this->getDoctrine()->getRepository('FSPaysBundle:Pays')->getPays($request->get('first_result', 5));
-        return $this->render('FSPaysBundle:pays:countrylis.html.twig', [
-            'posts' => $posts
-        ]);
+        $paginator  = $this->get("knp_paginator");
+        $result=$paginator->paginate(
+            $ListPays,
+            $request->query->getInt('page',1),
+            $request->query->getInt('limit',5));
+
+        return $this->render("FSPaysBundle:Pays:countrylis.html.twig", array(
+            'ListPays' => $result,
+        ));
     }
 
         }

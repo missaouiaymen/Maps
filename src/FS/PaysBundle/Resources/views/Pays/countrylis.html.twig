@@ -6,32 +6,53 @@
 {% endblock %}
 
 {% block fspays_body %}
+    <div class="panel-heading">
+    <div class="panel-title">
+        <div class="row">
+            <div class="col-md-6">
+                List OF Continent
+            </div>
 
-        <table>
-            <thead>
-            <tr>
-                <th>pays</th>
+            <div class="col-md-6">
+                <a href="{{ path('fs_pays_addcountry') }}" class="btn btn-info pull-right"> Ajouter un Continent</a></div>
+        </div>
+    </div>
+
+        <div class="panel-body">
+
+            <table class="table table-striped" id="dataTables-example">
+                <thead>
+                <th>Nom</th>
+                <th>Population</th>
                 <th>Continent</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for pays in pays %}
-                <tr>
-                    <td>{{ pays.nom}}</td>
-                    <td>{{ pays.population}}</td>
-                                        <td>
-                        {% for continent in pays.continent %}
-                            {{ continent.nom }}&nbsp;
-                        {% endfor %}
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-            <tfooter>
-                <tr>
-                    <td colspan="2">Total : {{ pays|length }}</td>
-                </tr>
-            </tfooter>
-        </table>
+                <th>superficie</th>
+                <th>drapeau</th>
+                <th>Actions</th>
+                </thead>
+                <tbody>
+                {% for pays in ListPays %}
+                    <tr class="{% if loop.index is divisibleby(2) %}odd{% else %}even{% endif %}">
+                        <td col>{{ pays.nom }}</td>
+                        <td>{{ pays.population }}</td>
+                        <td>{{ pays.continent.nom }}</td>
+                        <td>25472542</td>
+                        <td> <img src="{{ asset('assets/dist/img/flags-mini/tn.png') }}"></td>
+                        <td>
+                            <a href="{{ path('fs_pays_editcountry',{id : pays.id}) }}"> <p class="fa fa-edit"></p></a>
+                            <a href="{{ path('fs_pays_deletecountry',{id : pays.id}) }}"><p class="glyphicon glyphicon-remove"> </p></a>
+                        </td>
+                    </tr>
 
+                {% else %}
+                    <tr>
+                        <td>Pas (encore !) pays enregistrée</td>
+                    </tr>
+                {% endfor%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="navigation" align="center">
+        {{ knp_pagination_render(ListPays) }}
+    </div>
 {% endblock %}
