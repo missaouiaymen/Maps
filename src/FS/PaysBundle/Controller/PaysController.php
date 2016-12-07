@@ -16,6 +16,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Doctrine\Common\EventSubscriber;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\Paginator;
+use Symfony\Component\Finder\Exception\AccessDeniedException;
 
 
 /**
@@ -41,27 +42,7 @@ class PaysController extends Controller
             'listContinent' => $listContinent,
         ));
     }
-    public function ListAction($page)
-    {
-        $maxPays = $this->container->getParameter('max_pays_per_page');
-        $pays_count = $this->getDoctrine()
-            ->getRepository('FSPaysBundle:Pays')
-            ->countPublishedTotal();
-        $pagination = array(
-            'page' => $page,
-            'route' => 'article_list',
-            'pages_count' => ceil($pays_count / $maxPays),
-            'route_params' => array()
-        );
 
-        $pays = $this->getDoctrine()->getRepository('FSPaysBundle:Pays')
-            ->getList($page, $maxPays);
-
-        return $this->render('FSPaysBundle:Pays:list.html.twig', array(
-            'pays' => $pays,
-            'pagination' => $pagination
-        ));
-    }
     public function viewAction($id)
     {
         $pays = $this->getDoctrine()
@@ -75,6 +56,8 @@ class PaysController extends Controller
 
     public function addAction(Request $request)
     {
+        if(!$this->get('security.authorization_checker')->isGranted('ROLE_AUTEUR'))
+        { throw new AccessDeniedException('Accés limité aux auteurs.');}
         $pays = new Pays();
 
         // On crée le FormBuilder grâce au service form factory
@@ -87,9 +70,8 @@ class PaysController extends Controller
 
                 $em->flush();
 
-                $request->getSession()->getFlashBag()->add('notice', 'pays bien  enregistrée');
-                return $this->redirectToRoute('fs_pays_viewcountry', array('id' => $pays->getId()
-                ));
+                $request->getSession()->getFlashBag()->add('success', 'pays bien  enregistrée');
+                return $this->redirectToRoute('fs_pays_countrylist');
             }
         }
         return $this->render('FSPaysBundle:Pays:add.html.twig', array('form' => $form->createView()));
@@ -105,15 +87,15 @@ class PaysController extends Controller
             var_dump($pays->getPopulation());
             if ($form->isValid()) {
                 $em->flush();
-                $request->getSession()->getFlashBag()->add('notice', 'pays bien  enregistrée');
-                return $this->redirectToRoute('fs_pays_viewcountry', array('id' => $pays->getId()));
+                $request->getSession()->getFlashBag()->add('success', 'pays bien  enregistrée');
+                return $this->redirectToRoute('fs_pays_countrylist');
             }
         }
         return $this->render('FSPaysBundle:Pays:edit.html.twig',
             array('form' => $form->createView(),'id'=> $pays->getId()));
     }
 
-    public function deleteAction($id)
+    public function deleteAction($id, Request $request)
     {
         $em = $this->getDoctrine()->getEntityManager();
         $req = $em->getRepository('FSPaysBundle:Pays')->find($id);
@@ -126,7 +108,8 @@ class PaysController extends Controller
         $em->flush();
 
 
-        return new Response('Supression avec succée!');
+        $request->getSession()->getFlashBag()->add('success', 'pays bien  suprimer');
+        return $this->redirectToRoute('fs_pays_countrylist');
     }
 
 

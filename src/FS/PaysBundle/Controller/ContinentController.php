@@ -71,10 +71,9 @@ class ContinentController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($continent);
                 $em->flush();
-                $request->getSession()->getFlashBag()->add('notice', 'Continent bien  enregistrée');
+                $request->getSession()->getFlashBag()->add('success', 'Continent bien  enregistrée');
 
-                return $this->redirectToRoute('fs_pays_viewcontinent', array('id' => $continent->getId()
-                ));
+                return $this->redirectToRoute('fs_pays_continentlist');
             }
         }
         return $this->render('FSPaysBundle:Continent:add.html.twig', array('form' => $form->createView()));
@@ -89,15 +88,15 @@ class ContinentController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($continent);
                 $em->flush();
-                $request->getSession()->getFlashBag()->add('notice', 'Continent bien  enregistrée');
-                return $this->redirectToRoute('fs_pays_viewcontinent', array('id' => $continent->getId()));
+                $request->getSession()->getFlashBag()->add('success', 'Continent bien  modifier');
+                return $this->redirectToRoute('fs_pays_continentlist');
             }
         }
         return $this->render('FSPaysBundle:Continent:edit.html.twig',
             array('form' => $form->createView(),'id'=> $continent->getId()));
     }
 
-    public function deleteAction($id)
+    public function deleteAction($id ,Request $request)
     {
         $em = $this->getDoctrine()->getEntityManager();
         $req = $em->getRepository('FSPaysBundle:Continent')->find($id);
@@ -109,51 +108,11 @@ class ContinentController extends Controller
         $em->remove($req);
         $em->flush();
 
+        $request->getSession()->getFlashBag()->add('success', 'Continent bien  suprimé');
+        return $this->redirectToRoute('fs_pays_continentlist');
 
-        return new Response('Supression avec succée!');
     }
 
-    public function addpaysAction(Request $request)
-    {
-        // On crée un objet Continent
-        $pays = new Pays();
 
-        // On crée le FormBuilder grâce au service form factory
-        $form = $this->get('form.factory')->createBuilder(FormType::class, $pays)
-            ->add('nom', TextType::class)
-            ->add('population', NumberType::class)
-            ->add('continent', EntityType::class, array(
-                'class' => 'FSPaysBundle:Continent',
-                'choice_label' => 'nom',
-            ))
-            ->add('save', SubmitType::class)
-            ->getForm();
-        if ($request->isMethod('POST')) {
-            $form->handleRequest($request);
-            if ($form->isValid()) {
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($pays);
-                $em->flush();
-
-                $request->getSession()->getFlashBag()->add('notice', 'pays bien  enregistrée');
-                return $this->redirectToRoute('fs_pays_viewpays', array('id' => $pays->getId()
-                ));
-            }
-        }
-        return $this->render('FSPaysBundle:Pays:addpays.html.twig', array('form' => $form->createView()));
-    }
-
-    public function viewallpaysAction()
-    {
-
-        $ListPays = $this->getDoctrine()
-            ->getRepository('FSPaysBundle:Pays')
-            ->findAll();
-
-
-        return $this->render("FSPaysBundle:Pays:viewpays.html.twig", array(
-            'ListPays' => $ListPays,
-        ));
-    }
 
 }

@@ -25,7 +25,7 @@ class Continent
     /**
      * @ORM\OneToMany(targetEntity="Pays",mappedBy ="continent", cascade={"remove"} )
      */
-    private $pays;
+    public $pays;
 
     /**
      * @ORM\Column(name="id", type="integer")

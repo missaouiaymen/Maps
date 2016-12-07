@@ -1,14 +1,10 @@
 fs_pays_home:
-    path: /{page}
+    path: /
     defaults:
         _controller: FSPaysBundle:Continent:index
         page: 1
     requirements:
         page: \d*
-fs_home:
-    path: /home
-    defaults:
-        _controller: FSPaysBundle:Default:home
 
 fs_pays_continentlist:
     path: continent/continentlist

@@ -33,10 +33,17 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <meta name="description" content="Made with WOW Slider - Create beautiful, responsive image sliders in a few clicks. Awesome skins and animations. Wowslider.com" />
+
+    <!-- Start WOWSlider.com HEAD section --> <!-- add to the <head> of your page -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/dist/engine1/style.css') }}" />
+    <script type="text/javascript" src="{{ asset ('assets/dist/engine1/jquery.js')}}"></script>
+    <!-- End WOWSlider.com HEAD section -->
 
 </head>
 
 <body>
+
 
 <div id="wrapper">
     <!-- Navigation -->
@@ -147,14 +154,26 @@
     </nav>
 
     <div id="page-wrapper">
+
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">Dashboard</h1>
+
             </div>
+
         </div>
         <!-- /.row -->
         <div id="contient" class="row">
+            {% if app.session.flashBag.has('success') %}
+                <div class="alert alert-success">
+                    {% for msg in app.session.flashBag.get('success') %}
+                        {{ msg }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+
             {% block body %}
+
             {% endblock %}
 
         </div>
@@ -167,7 +186,8 @@
 </div>
 <!-- /.panel-body -->
 <div class="panel-footer">
-    <p>tout droit réservé © {{ 'now'|date('Y') }}|Creé par:<a href="http://www.fullstack.tn/">Full Stack</a> .</p>
+    <p class="fot">{{ 'now'|date('D M Y') }} | All Rights Reserved © <br> Created By|<a href="http://www.fullstack.tn/">Full Stack</a> .</p>
+    <img src="{{ asset('assets/dist/img/4764067_orig.jpg') }}"">
 </div>
 
 <!-- jQuery -->
@@ -186,6 +206,20 @@
 
 <!-- Custom Theme JavaScript -->
 <script src="{{ asset('assets/dist/js/sb-admin-2.js') }}"></script>
+<script src="{{ asset('assets/vendor/datatables/js/jquery.dataTables.min.js')}}"></script>
+<script src="{{ asset('assets/vendor/datatables-plugins/dataTables.bootstrap.min.js')}}"></script>
+<script src="{{ asset('assets/vendor/datatables-responsive/dataTables.responsive.js')}}"></script>
+<script src="{{ asset ('assets/dist/engine1/wowslider.js')}}"></script>
+<script src="{{ asset ('assets/dist/engine1/script.js')}}"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#dataTables-example').DataTable({
+            responsive: true
+        });
+
+    });
+</script>
 
 </body>
 

@@ -22,27 +22,27 @@ class Pays
      * @ORM\ManyToOne(targetEntity="FS\PaysBundle\Entity\Continent",inversedBy="pays")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $continent;
+    public $continent;
 
     /**
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    public $id;
 
     /**
      * @ORM\Column(name="nom", type="string", length=255 ,unique=true)
      */
-    private $nom;
+    public $nom;
 
     /**
      * @ORM\Column(name="population", type="integer", unique=true)
      */
-    private $population;
+    public $population;
 
 
-    private  $oldPopulation ;
+    public  $oldPopulation ;
 
     /**
      * Get id
