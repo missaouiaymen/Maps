@@ -11,21 +11,22 @@
             <div class="row">
                 <div class="col-md-6">
                    <h1> List Of Continents</h1>
-                </div>
 
-                <div class="col-md-6">
-                    <a href="{{ path('fs_pays_addcontinent') }}" class="btn btn-info pull-right"> ADD Continent</a></div>
-                </div>
             </div>
+
+                <div class="col-md-12">
+                    <a href="{{ path('fs_pays_addcontinent') }}" class="btn btn-primary pull-right"> ADD Continent</a></div>
+            </div>
+        </div>
 
         <div class="panel-body">
 
             <table class="table table-striped" id="dataTables-example">
-                <thead align="center">
-                <th>NAME</th>
-                <th>POPULATION</th>
-                <th>NUMBER OF COUNTRIES</th>
-                <th>ACTIONS</th>
+                <thead >
+                <th class="text-center">NAME</th>
+                <th class="text-center">POPULATION</th>
+                <th class="text-center">NUMBER OF COUNTRIES</th>
+                <th class="text-center">ACTIONS</th>
                 </thead>
                 <tbody align="center">
                 {% for continent in listContinent %}
@@ -34,9 +35,9 @@
                         <td>{{ continent.population }}</td>
                         <td>{{ continent.nbpays }}</td>
                         <td>
-                            <a href="{{ path('fs_pays_editcontinent',{id : continent.id}) }}"><p class="fa fa-edit"></p> </a>
-                            <a href="{{ path('fs_pays_deletecontinent',{id : continent.id}) }}"><p class="glyphicon glyphicon-remove"> </p></a>
-                            <a href="{{ path('fs_pays_addcountry') }}"><p class="glyphicon glyphicon-plus-sign"></p> </a>
+                            <a href="{{ path('fs_pays_editcontinent',{id : continent.id }) }}"><p class="fa fa-edit"></p> </a>&nbsp;&nbsp;
+                            <a data-confirm="Etes-vous certain de vouloir supprimer?"href="{{ path('fs_pays_deletecontinent',{id : continent.id}) }}"><p class="glyphicon glyphicon-remove"> </p>&nbsp;&nbsp;
+                            <a href="{{ path('fs_pays_addcountry',{id: continent.id }) }}"><p class="glyphicon glyphicon-plus-sign"></p> </a>
                         </td>
                     </tr>
 
@@ -50,3 +51,4 @@
         </div>
     </div>
 {% endblock %}
+

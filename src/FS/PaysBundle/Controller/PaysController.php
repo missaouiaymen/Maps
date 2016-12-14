@@ -67,10 +67,10 @@ class PaysController extends Controller
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($pays);
-
                 $em->flush();
 
-                $request->getSession()->getFlashBag()->add('success', 'pays bien  enregistrée');
+                $request->getSession()->getFlashBag()->add('success', '
+Successfully registered country');
                 return $this->redirectToRoute('fs_pays_countrylist');
             }
         }
@@ -87,7 +87,7 @@ class PaysController extends Controller
             var_dump($pays->getPopulation());
             if ($form->isValid()) {
                 $em->flush();
-                $request->getSession()->getFlashBag()->add('success', 'pays bien  enregistrée');
+                $request->getSession()->getFlashBag()->add('success', 'Successfully Modified country');
                 return $this->redirectToRoute('fs_pays_countrylist');
             }
         }
@@ -108,7 +108,7 @@ class PaysController extends Controller
         $em->flush();
 
 
-        $request->getSession()->getFlashBag()->add('success', 'pays bien  suprimer');
+        $request->getSession()->getFlashBag()->add('success', 'Successfully Remouved  country');
         return $this->redirectToRoute('fs_pays_countrylist');
     }
 

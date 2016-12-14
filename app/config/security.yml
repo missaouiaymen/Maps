@@ -1,22 +1,23 @@
-# To get started with security, check out the documentation:
 # http://symfony.com/doc/current/security.html
 security:
     encoders:
-        Symfony\Component\Security\Core\User\User: plaintext
-        FS\UserBundle\Entity\User: sha512
+        FOS\UserBundle\Model\UserInterface: bcrypt
     # http://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
-    providers:
-        main:
-            id: fos_user.user_provider.username
-
     role_hierarchy:
-        ROLE_USER : ROLE_AUTEUR
-        ROLE_ADMIN: ROLE_USER
+        ROLE_ADMIN:       ROLE_USER
         ROLE_SUPER_ADMIN: ROLE_ADMIN
 
+    providers:
+        chain_provider:
+            chain:
+                providers: [fos_userbundle, fr3d_ldapbundle]
+        fr3d_ldapbundle:
+            id: fr3d_ldap.security.user.provider
+        fos_userbundle:
+            id: fos_user.user_provider.username_email
 
     firewalls:
-        # disables authentication for assets and the profiler, adapt it according to your needs
+
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
@@ -29,28 +30,25 @@ security:
             anonymous: true
 
         main:
+            fr3d_ldap: ~
             pattern: ^/
-            anonymous: false
             form_login:
-                provider: main
-                login_path: fos_user_security_login
-                check_path: fos_user_security_check
-                default_target_path : /maps
-            logout:
-                path: fos_user_security_logout
-                target: fos_user_security_login
+                provider: fos_userbundle
+                csrf_token_generator: security.csrf.token_manager # Use form.csrf_provider instead for Symfony <2.4
+                remember_me: true
+                default_target_path: /
+            logout:       true
+            anonymous:    true
             remember_me:
-                secret: %secret%
-            # activate different ways to authenticate
+                secret:      %secret%
+                lifetime: 604800 # 1 week in seconds
+                path:     /
+                domain:   ~ # Defaults to the current domain from $_SERVER
+                secure:   true
+                httponly: true
 
-            # http_basic: ~
-            # http://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
-
-            # form_login: ~
-            # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
     access_control:
         - {path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY}
         - {path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY}
         - {path: ^/registring, role: IS_AUTHENTICATED_ANONYMOUSLY}
         - {path: ^/admin, roles: ROLE_ADMIN}
-        #-{path:^/login, roles: IS_AUTHENTICATED_AMONYMOUSLY, require_channel:https}

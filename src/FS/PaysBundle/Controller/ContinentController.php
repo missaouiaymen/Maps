@@ -71,7 +71,7 @@ class ContinentController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($continent);
                 $em->flush();
-                $request->getSession()->getFlashBag()->add('success', 'Continent bien  enregistrée');
+                $request->getSession()->getFlashBag()->add('success', 'Successfully registered continent');
 
                 return $this->redirectToRoute('fs_pays_continentlist');
             }
@@ -88,7 +88,7 @@ class ContinentController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($continent);
                 $em->flush();
-                $request->getSession()->getFlashBag()->add('success', 'Continent bien  modifier');
+                $request->getSession()->getFlashBag()->add('success', 'Successfully Modified continent');
                 return $this->redirectToRoute('fs_pays_continentlist');
             }
         }
@@ -108,7 +108,7 @@ class ContinentController extends Controller
         $em->remove($req);
         $em->flush();
 
-        $request->getSession()->getFlashBag()->add('success', 'Continent bien  suprimé');
+        $request->getSession()->getFlashBag()->add('success', 'Successfully Removed continent');
         return $this->redirectToRoute('fs_pays_continentlist');
 
     }

@@ -1,36 +1,11 @@
-.navbar-default {
-    border-color: #f76802;
-}
-.page-header {
-
-    border-bottom: 1px solid #f76802;
-}
-table {
-    border-color: #f76802;
-}
-tr {
-
-    border-color : #f76802;
-    border-top-color: #f76802;
-}
-#page-wrapper {
-    border-left: #f76802;
-}
-.panel-footer {
-
-    border-top: 1px solid #f76802;
-}
-.panel-primary {
-    border-color: #f76802;
-}
-.btn-info {
-    color: #fff;
-    background-color: #5bc0de;
-    border-color: #f76802;
-}
-.fot
+.footer
 {
-    background-image:url("assets/dist/img/4764067_orig.jpg");
-    background-color: #00a7d0;
+    background-image: url("../img/4764067_orig.jpg");
+}
+.logo
 
+{
+    background-image: url("../img/logo2.png");
+    width: 219px;
+    height: 40px;
 }

@@ -6,16 +6,11 @@
 {% endblock %}
 
 {% block fscontinent_body %}
-
-    <h2>Modifier </h2>
-
+<h1>Edit Continent</h1>
     {{ include("FSPaysBundle:Continent:form.html.twig") }}
 
 
-        <a href="{{ path('fs_pays_viewcontinent', {'id': id}) }}" class="btn btn-default">
-            <i class="glyphicon glyphicon-chevron-left"></i>
-            Retour
-        </a>
+
 
 
 {% endblock %}

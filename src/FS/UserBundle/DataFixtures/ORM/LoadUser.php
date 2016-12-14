@@ -6,32 +6,46 @@ namespace FS\UserBundle\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use FS\UserBundle\Entity\User;
+use FS\UserBundle\Entity\Group;
+use Doctrine\Common\DataFixtures\AbstractFixture;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class LoadUser implements FixtureInterface
-{
-    public function load(ObjectManager $manager)
-    {
-        // Les noms d'utilisateurs à créer
-        $listNames = array('admin', 'user', 'anna');
 
-        foreach ($listNames as $name) {
-            // On crée l'utilisateur
-            $user = new User;
+class UserFixtures extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
+{ /** * @var ContainerInterface */ private $container; /** * {@inheritDoc} */
+ public function setContainer(ContainerInterface $container = null) { $this->container = $container;}
 
-            // Le nom d'utilisateur et le mot de passe sont identiques pour l'instant
-            $user->setUsername($name)->setEmail($name.'@gmail.com');
-            $user->setPlainPassword($name)->setEnabled(1);
 
-            // On ne se sert pas du sel pour l'instant
-            $user->setSalt('');
-            // On définit uniquement le role ROLE_USER qui est le role de base
-            $user->setRoles(array('ROLE_USER'));
+public function getOrder() {
+    return 0;
+}
 
-            // On le persiste
-            $manager->persist($user);
-        }
+public function load(ObjectManager $manager) {
 
-        // On déclenche l'enregistrement
-        $manager->flush();
-    }
+    $userManager = $this->container->get('fos_user.user_manager');
+
+    $user = $userManager->createUser();
+
+    $user
+        ->setUsername('someguy')
+        ->setEmail('john.doe@example.com')
+        ->setLastLogin(\DateTime::createFromFormat('j-M-Y', '15-Feb-2009'))
+        ->setEnabled(true);
+
+    $user->setPlainPassword('somepass');
+
+    // Equivalent à :
+
+//        $encoder = $this->container
+//                ->get('security.encoder_factory')
+//                ->getEncoder($user)
+//            ;
+//        $user->setPassword($encoder->encodePassword('somepass', $user->getSalt()));
+
+
+    $userManager->updateUser($user);
+}
+
 }

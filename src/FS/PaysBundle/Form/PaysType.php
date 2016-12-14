@@ -3,9 +3,11 @@
 namespace FS\PaysBundle\Form;
 
 use Doctrine\ORM\Mapping\Entity;
+use Symfony\Component\DependencyInjection\Tests\Compiler\F;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -18,10 +20,13 @@ class PaysType extends AbstractType
     {
         $builder->add('nom')
             ->add('population')
+            ->add('drapeaux', drapeauxType::class)
+            ->add('capitale')
+            ->add('superficie')
             ->add('continent',EntityType::class, array(
             'class' => 'FSPaysBundle:Continent',
             'choice_label' => 'nom',))
-            ->add('save' ,SubmitType::class)        ;
+            ->add('save' ,SubmitType::class);
     }
     
     /**

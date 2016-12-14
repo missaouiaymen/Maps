@@ -10,36 +10,44 @@
     <div class="panel-title">
         <div class="row">
             <div class="col-md-6">
-                List OF Continent
+                <h1>
+                Country List
+ </h1>
             </div>
 
-            <div class="col-md-6">
-                <a href="{{ path('fs_pays_addcountry') }}" class="btn btn-info pull-right"> Ajouter un Continent</a></div>
-        </div>
+            <div class="col-md-12">
+                <a href="{{ path('fs_pays_addcountry') }}" class="btn btn-primary pull-right"> ADD COUNTRY</a></div>
+
+
     </div>
 
         <div class="panel-body">
 
             <table class="table table-striped" id="dataTables-example">
                 <thead>
+                <th>#</th>
                 <th>Nom</th>
                 <th>Population</th>
                 <th>Continent</th>
+                <th>Capitale</th>
                 <th>superficie</th>
-                <th>drapeau</th>
                 <th>Actions</th>
                 </thead>
                 <tbody>
                 {% for pays in ListPays %}
                     <tr class="{% if loop.index is divisibleby(2) %}odd{% else %}even{% endif %}">
+                        <td> <img
+                                    src="{{ asset(pays.drapeaux.webPath) }}"
+                                    alt="{{ pays.drapeaux.alt }}"
+                            /></td>
                         <td col>{{ pays.nom }}</td>
                         <td>{{ pays.population }}</td>
                         <td>{{ pays.continent.nom }}</td>
-                        <td>54456454</td>
-                        <td> <img src="{{ asset('assets/dist/img/flags-mini/tn.png') }}"></td>
-                        <td>
+                        <td>{{ pays.capitale }}</td>
+                        <td>{{ pays.superficie }}</td>
+                         <td>
                             <a href="{{ path('fs_pays_editcountry',{id : pays.id}) }}"> <p class="fa fa-edit"></p></a>
-                            <a href="{{ path('fs_pays_deletecountry',{id : pays.id}) }}"><p class="glyphicon glyphicon-remove"> </p></a>
+                            <a data-confirm="Etes-vous certain de vouloir supprimer?" href="{{ path('fs_pays_deletecountry',{id : pays.id}) }}"><p class="glyphicon glyphicon-remove"> </p></a>
                         </td>
                     </tr>
 
@@ -52,7 +60,5 @@
             </table>
         </div>
     </div>
-    <div class="navigation" align="center">
-        {{ knp_pagination_render(ListPays) }}
-    </div>
+      </div>
 {% endblock %}

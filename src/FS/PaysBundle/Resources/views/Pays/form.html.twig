@@ -1,17 +1,16 @@
 
-<div class="panel panel-primary">
+
     <div class="panel-heading">
+        <div class="panel-title">
         <div class="row">
-            <div class="col-xs-3">
-                Add Or Edit COUNTRY
-            </div>
+
 
         </div>
     </div>
-    <a href="#">
+<hr>
 
-        <div class="panel-footer">
-                <span class="pull-left">
+        <div class="panel-body">
+                <span class="pull-center">
     {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
 
     {# Les erreurs générales du formulaire. #}
@@ -24,29 +23,51 @@
     <div class="form-group">
         {# Génération du label. #}
         {{ form_label(form.nom, "NAME", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
-
         {# Affichage des erreurs pour ce champ précis. #}
         {{ form_errors(form.nom) }}
-
         <div class="col-sm-10">
             {# Génération de l'input. #}
             {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
         </div>
     </div>
-
     {# Idem pour un autre champ. #}
     <div class="form-group">
         {{ form_label(form.population, "POPULATION", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
-        {{ form_errors(form.nom) }}
+        {{ form_errors(form.population) }}
         <div class="col-sm-10">
             {{ form_widget(form.population, {'attr': {'class': 'form-control'}}) }}
         </div>
     </div>
+
     <div class="form-group">
         {{ form_label(form.continent, "CONTIENET", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
         {{ form_errors(form.continent) }}
         <div class="col-sm-10">
             {{ form_widget(form.continent, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.drapeaux, "DRAPEAUX", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        {{ form_errors(form.drapeaux) }}
+        <div class="col-sm-10">
+            {{ form_widget(form.drapeaux, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.capitale, "CAPITALE", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        {{ form_errors(form.capitale) }}
+        <div class="col-sm-10">
+            {{ form_widget(form.capitale, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.superficie, "SUPERFICIE", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+        {{ form_errors(form.superficie) }}
+        <div class="col-sm-10">
+            {{ form_widget(form.superficie, {'attr': {'class': 'form-control'}}) }}
         </div>
     </div>
     {# Pour le bouton, pas de label ni d'erreur, on affiche juste le widget #}

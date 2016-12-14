@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
+
 /**
  * @ORM\Table(name="pays")
  * @ORM\Entity(repositoryClass="FS\PaysBundle\Entity\PaysRepository")
@@ -25,6 +26,11 @@ class Pays
     public $continent;
 
     /**
+     * @ORM\OneToOne(targetEntity="FS\PaysBundle\Entity\drapeaux", cascade={"persist", "remove"})
+     */
+    public $drapeaux;
+
+    /**
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -41,6 +47,15 @@ class Pays
      */
     public $population;
 
+    /**
+     * @ORM\Column(name="superficie", type="integer")
+     */
+    public $superficie;
+
+    /**
+     * @ORM\Column(name="capitale", type="string", length=255)
+     */
+    public $capitale;
 
     public  $oldPopulation ;
 
@@ -164,6 +179,39 @@ class Pays
 
     public  function setOldPopulation($pop){
         $this->oldPopulation = $pop;
+    }
+    public function setDrapeaux(drapeaux $drapeaux=null)
+    {
+        $this->drapeaux=$drapeaux;
+    }
+
+    /**
+     * @return drapeaux
+     */
+    public function getDrapeaux()
+    {
+        return $this->drapeaux;
+    }
+    public function setCapitale($capitale)
+    {
+        $this->capitale=$capitale;
+    }
+    public function getCapitale()
+    {
+        return $this->capitale;
+    }
+
+    public function setSuperficie($superficie)
+    {
+        $this->superficie = $superficie;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSuperficie()
+    {
+        return $this->superficie;
     }
 }
 
