@@ -58,11 +58,17 @@ class ContinentController extends Controller
         ));
     }
 
+/**
+ *
+ * @Security("has_role('ROLE_ADMIN') and has_role('ROLE_ADMIN')")
+ *
+*/
 
     public function addAction(Request $request)
     {
-       if(!$this->get('security.authorization_checker')->isGranted('ROLE_AUTEUR'))
-       { throw new AccessDeniedException('Accés limité aux auteurs.');}
+        if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+            // Sinon on déclenche une exception « Accès interdit »
+            throw new AccessDeniedException('Accès limité aux admin.');}
         $continent = new Continent();
             $form = $this->createForm(ContinentType::class,$continent);
         if ($request->isMethod('POST')) {

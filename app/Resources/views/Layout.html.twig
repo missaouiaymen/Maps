@@ -96,9 +96,9 @@
                         </li>
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
-                        <a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <a href="{{ path('logout') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                     {% else %}
-                        <a href="{{ path('fos_user_security_login') }}">Login</a>
+                        <a href="{{ path('login') }}">Login</a>
                     {% endif %}
                 </ul>
                 <!-- /.dropdown-user -->
@@ -128,7 +128,9 @@
                                 <a href="{{ path('fs_pays_continentlist') }}">List of Continents</a>
                             </li>
                             <li>
+                                {% if is_granted('ROLE_ADMIN') %}
                                 <a href="{{ path('fs_pays_addcontinent') }}">Add Continent</a>
+                                {% endif %}
                             </li>
                         </ul>
                     </li>
@@ -139,9 +141,26 @@
                                 <a href="{{ path('fs_pays_countrylist') }}">List Of Countrys</a>
                             </li>
                             <li>
+                                {% if is_granted('ROLE_ADMIN') %}
                                 <a href="{{ path('fs_pays_addcountry') }}">Add Country</a>
+                                {% endif %}
                             </li>
-                        </ul> </li> </ul>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Usres<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="{{ path('fs_pays_countrylist') }}">List Of Countrys</a>
+                            </li>
+                            <li>
+                                {% if is_granted('ROLE_ADMIN') %}
+                                <a href="{{ path('fs_pays_addcountry') }}">Add Country</a>
+                                {% endif %}
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>

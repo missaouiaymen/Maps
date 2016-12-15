@@ -56,8 +56,6 @@ class PaysController extends Controller
 
     public function addAction(Request $request)
     {
-        if(!$this->get('security.authorization_checker')->isGranted('ROLE_AUTEUR'))
-        { throw new AccessDeniedException('Accés limité aux auteurs.');}
         $pays = new Pays();
 
         // On crée le FormBuilder grâce au service form factory

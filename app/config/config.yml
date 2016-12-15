@@ -2,7 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
-    - { resource: "@FSUserBundle/Resources/config/services.yml" }
+
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -82,12 +82,6 @@ assetic:
     debug:  '%kernel.debug%'
     use_controller: '%kernel.debug%'
 
-fos_user:
-    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
-    firewall_name: main
-    user_class: FS\UserBundle\Entity\User
-    group:
-        group_class: FS\UserBundle\Entity\Group
 
 
 knp_paginator:
@@ -101,22 +95,7 @@ knp_paginator:
         pagination: KnpPaginatorBundle:Pagination:twitter_bootstrap_v3_pagination.html.twig     # sliding pagination controls template
         sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig
 
-lexik_form_filter:
-    force_case_insensitivity: false
-    where_method: ~  # null | and | or
-
-fr3d_ldap:
-    driver:
-       host:     ldap.forumsys.com
-       port:     389
-       bindRequiresDn:      true
-       baseDn:   cn=read-only-admin,dc=example,dc=com
-       password: password
-    user:
-        baseDn: dc=example,dc=com
-        filter: (&(objectClass=person))
-        attributes:
-           - { ldap_attr: uid,  user_method: setUsername }
-           - { ldap_attr: mail, user_method: setEmail }
-    service:
-        ldap_manager:  app.ldap.ldap_manager
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: FS\UserBundle\Entity\User
