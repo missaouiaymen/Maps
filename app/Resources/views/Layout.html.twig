@@ -96,9 +96,9 @@
                         </li>
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
-                        <a href="{{ path('logout') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                     {% else %}
-                        <a href="{{ path('login') }}">Login</a>
+                        <a href="{{ path('fos_user_security_login') }}">Login</a>
                     {% endif %}
                 </ul>
                 <!-- /.dropdown-user -->
@@ -148,15 +148,14 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Usres<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Administration <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="{{ path('fs_pays_countrylist') }}">List Of Countrys</a>
+                                <a href="{{ path('admin_users_index') }}">Users</a>
                             </li>
                             <li>
-                                {% if is_granted('ROLE_ADMIN') %}
-                                <a href="{{ path('fs_pays_addcountry') }}">Add Country</a>
-                                {% endif %}
+                                <a href="{{ path('admin_groups_new') }}">Groups</a>
+
                             </li>
                         </ul>
                     </li>

@@ -102,8 +102,17 @@ class ContinentController extends Controller
             array('form' => $form->createView(),'id'=> $continent->getId()));
     }
 
+    /**
+     *
+     * @Security("has_role('ROLE_ADMIN') and has_role('ROLE_ADMIN')")
+     *
+     */
+
     public function deleteAction($id ,Request $request)
     {
+        if (!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+            // Sinon on déclenche une exception « Accès interdit »
+            throw new AccessDeniedException('Accès limité aux admin.');}
         $em = $this->getDoctrine()->getEntityManager();
         $req = $em->getRepository('FSPaysBundle:Continent')->find($id);
 

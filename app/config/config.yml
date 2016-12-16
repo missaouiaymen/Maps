@@ -46,8 +46,6 @@ twig:
             - LexikFormFilterBundle:Form:form_div_layout.html.twig
 
 
-
-
 # Doctrine Configuration
 doctrine:
     dbal:
@@ -99,3 +97,5 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: FS\UserBundle\Entity\User
+    group:
+        group_class: FS\UserBundle\Entity\Group

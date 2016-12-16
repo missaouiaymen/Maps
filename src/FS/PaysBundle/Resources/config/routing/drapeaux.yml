@@ -1,0 +1,12 @@
+drapeaux_index:
+    path:     /
+    defaults: { _controller: "FSPaysBundle:drapeaux:index" }
+    methods:  GET
+
+drapeaux_show:
+    path:     /{id}/show
+    defaults: { _controller: "FSPaysBundle:drapeaux:show" }
+    methods:  GET
+
+
+

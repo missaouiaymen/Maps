@@ -1,3 +1,7 @@
+fs_pays_drapeaux:
+    resource: "@FSPaysBundle/Resources/config/routing/drapeaux.yml"
+    prefix:   /drapeaux
+
 fs_pays_home:
     path: /
     defaults:

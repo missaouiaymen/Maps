@@ -1,13 +1,17 @@
 <?php
-
 namespace FS\UserBundle\Controller;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
+use Symfony\Component\HttpFoundation\Request;
 class DefaultController extends Controller
 {
-    public function indexAction()
+    /**
+     * @Route("/", name="homepage")
+     */
+    public function indexAction(Request $request)
     {
-        return $this->render('FSUserBundle:Default:index.html.twig');
+        // replace this example code with whatever you need
+        return $this->redirectToRoute('fs_pays_home');
     }
 }
+

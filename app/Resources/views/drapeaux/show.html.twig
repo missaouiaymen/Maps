@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Drapeaux</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ drapeaux.id }}</td>
+            </tr>
+            <tr>
+                <th>Url</th>
+                <td>{{ drapeaux.url }}</td>
+            </tr>
+            <tr>
+                <th>Alt</th>
+                <td>{{ drapeaux.alt }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('drapeaux_index') }}">Back to the list</a>
+        </li>
+    </ul>
+{% endblock %}

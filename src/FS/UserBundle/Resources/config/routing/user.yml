@@ -1,0 +1,12 @@
+admin_users_index:
+    path:     /
+    defaults: { _controller: "FSUserBundle:User:index" }
+    methods:  GET
+
+admin_users_show:
+    path:     /{id}/show
+    defaults: { _controller: "FSUserBundle:User:show" }
+    methods:  GET
+
+
+

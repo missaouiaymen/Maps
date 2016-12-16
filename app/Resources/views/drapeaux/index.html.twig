@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Drapeauxes list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Url</th>
+                <th>Alt</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for drapeaux in drapeauxes %}
+            <tr>
+                <td><a href="{{ path('drapeaux_show', { 'id': drapeaux.id }) }}">{{ drapeaux.id }}</a></td>
+                <td>{{ drapeaux.url }}</td>
+                <td>{{ drapeaux.alt }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('drapeaux_show', { 'id': drapeaux.id }) }}">show</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+{% endblock %}
