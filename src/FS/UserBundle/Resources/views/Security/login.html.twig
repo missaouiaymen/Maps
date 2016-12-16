@@ -8,14 +8,37 @@
     {% endif %}
 
     {# Le formulaire, avec URL de soumission vers la route « login_check » comme on l'a vu #}
-    <form action="{{ path('fos_user_security_check') }}" method="post">
+    <form action="{{ path('fos_user_security_check') }}" method="post" class="form-group">
+        <fieldset>
+            <h2>Please Sign In</h2>
+            <hr class="colorgraph">
+            <div class="form-group">
         <label for="username">Login :</label>
-        <input type="text" id="username" name="_username" value="{{ last_username }}" />
-
-        <label for="password">Mot de passe :</label>
-        <input type="password" id="password" name="_password" />
+        <input type="text" id="username" name="_username" value="{{ last_username }}"  class="form-control"/>
+                <div class="form-group">
+        <label for="password">Password :</label>
+        <input type="password" id="password" name="_password"  class="form-control"/>
         <br />
-        <input type="submit" value="Connexion" />
+                    <span class="button-checkbox">
+					<button type="button" class="btn btn-info active" data-color="info"><i class="state-icon glyphicon glyphicon-check"></i>&nbsp;Remember Me</button>
+                    <input type="checkbox" name="remember_me" id="remember_me" checked="checked" class="hidden">
+					<a href="" class="btn btn-link pull-right">Forgot Password?</a>
+				</span>
+                    <hr class="colorgraph">
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                            <input type="submit" class="btn btn-lg btn-success btn-block" value="Sign In">
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                            <a href="{{ path('fos_user_security_resetting') }}" class="btn btn-lg btn-primary btn-block">Register</a>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </fieldset>
+
     </form>
+
+
 
 {% endblock %}

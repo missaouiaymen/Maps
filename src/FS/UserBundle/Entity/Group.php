@@ -22,12 +22,11 @@ protected $id;
 
 
     /**
+     * @var
+     *
      * @ORM\ManyToMany(targetEntity="User", mappedBy="groups")
-     * @ORM\JoinTable(name="user_user_group",
-     *     joinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="id")},
-     *     inverseJoinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")})
      */
-    private $user;
+    protected $users;
 
     /**
      * Constructor
