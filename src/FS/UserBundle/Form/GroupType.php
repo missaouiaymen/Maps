@@ -14,8 +14,8 @@ class GroupType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name')
-                ->add('roles');
+        parent::buildForm($builder, $options);
+        $builder->add('groups');
     }
     
     /**

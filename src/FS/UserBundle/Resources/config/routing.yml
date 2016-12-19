@@ -1,6 +1,6 @@
-fs_user_admin_groups:
-    resource: "@FSUserBundle/Resources/config/routing/group.yml"
-    prefix:   /admin/groups
+#fs_user_admin_groups:
+#    resource: "@FSUserBundle/Resources/config/routing/group.yml"
+#    prefix:   /admin/groups
 
 fs_user_admin_users:
     resource: "@FSUserBundle/Resources/config/routing/user.yml"
