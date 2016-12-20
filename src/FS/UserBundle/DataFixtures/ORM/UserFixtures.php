@@ -13,29 +13,32 @@ class UserFixtures extends AbstractFixture implements OrderedFixtureInterface, C
 {
 
     /** * @var ContainerInterface */
-    private $container; /** * {@inheritDoc} */
-    public function setContainer(ContainerInterface $container = null) { $this->container = $container;
-}
+    private $container;
 
-public function getOrder() {
-    return 0;
-}
+    /** * {@inheritDoc} */
+    public function setContainer(ContainerInterface $container = null) {
+        $this->container = $container;
+    }
 
-public function load(ObjectManager $manager) {
+    public function getOrder() {
+        return 0;
+    }
 
-    $userManager = $this->container->get('fos_user.user_manager');
+    public function load(ObjectManager $manager) {
 
-    $user = $userManager->createUser();
+//        $userManager = $this->container->get('fos_user.user_manager');
+//
+//        $user = $userManager->createUser();
+//
+//        $user
+//            ->setUsername('someguy')
+//            ->setEmail('john.doe@example.com')
+//            ->setFirstLogin(\DateTime::createFromFormat('j-M-Y', '15-Feb-2009'))
+//            ->setEnabled(true);
+//
+//        $user->setPlainPassword('somepass');
 
-    $user
-        ->setUsername('someguy')
-        ->setEmail('john.doe@example.com')
-        ->setFirstLogin(\DateTime::createFromFormat('j-M-Y', '15-Feb-2009'))
-        ->setEnabled(true);
-
-    $user->setPlainPassword('somepass');
-
-    // Equivalent à :
+        // Equivalent à :
 
 //        $encoder = $this->container
 //                ->get('security.encoder_factory')
@@ -44,7 +47,7 @@ public function load(ObjectManager $manager) {
 //        $user->setPassword($encoder->encodePassword('somepass', $user->getSalt()));
 
 
-    $userManager->updateUser($user);
-}
+        //$userManager->updateUser($user);
+    }
 
 }

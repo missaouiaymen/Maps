@@ -21,19 +21,15 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="FS\UserBundle\Entity\Group")
-     * @ORM\JoinTable(name="user_group",
-     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="id")}
-     * )
+     * @ORM\ManyToMany(targetEntity="Group", inversedBy="users")
+     * @ORM\JoinTable(name="users_groups")
      */
-    protected $group;
-
+    protected $groups;
 
     public function __construct()
     {
         parent::__construct();
-        // your own logic
+        $this->groups = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     }

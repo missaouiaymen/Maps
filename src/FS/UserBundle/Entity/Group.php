@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="group")
+ * @ORM\Table(name="`group`")
  */
 class Group extends BaseGroup
 {
@@ -19,5 +19,14 @@ class Group extends BaseGroup
      */
     protected $id;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="groups")
+     */
+    private $users;
+
+    public function __construct() {
+        parent::__construct('');
+        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
 }

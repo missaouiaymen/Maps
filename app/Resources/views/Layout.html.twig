@@ -8,81 +8,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
     <title>{% block title %}FS Maps{% endblock %}</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-
     <!-- MetisMenu CSS -->
     <link href="{{ asset('assets/vendor/metisMenu/metisMenu.min.css') }}" rel="stylesheet">
-
     <!-- Custom CSS -->
     <link href="{{ asset('assets/dist/css/sb-admin-2.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/dist/css/style.css') }}" rel="stylesheet">
-
     <!-- Morris Charts CSS -->
     <link href="{{ asset('assets/vendor/morrisjs/morris.css') }}" rel="stylesheet">
-
     <!-- Custom Fonts -->
     <link href="{{ asset('assets/vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <meta name="description" content="Made with WOW Slider - Create beautiful, responsive image sliders in a few clicks. Awesome skins and animations. Wowslider.com" />
-
     <!-- Start WOWSlider.com HEAD section --> <!-- add to the <head> of your page -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/dist/engine1/style.css') }}" />
     <script type="text/javascript" src="{{ asset ('assets/dist/engine1/jquery.js')}}"></script>
     <!-- End WOWSlider.com HEAD section -->
 
 </head>
-
 <body>
-
-
 <div id="wrapper">
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
-
             <a href="{{ path('fs_pays_home') }}"><img src="{{ asset('assets/dist/img/logo2.png') }}"></a>
         </div>
         <ul class="nav navbar-top-links navbar-right">
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                     <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-messages">
-
-
                 </ul>
 
             </li>
-            <!-- /.dropdown -->
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-tasks fa-fw"></i> <i class="fa fa-caret-down"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-tasks">
-                </ul>
-                <!-- /.dropdown-tasks -->
-            </li>
-            <!-- /.dropdown -->
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-alerts">
-
-                </ul>
-                <!-- /.dropdown-alerts -->
-            </li>
-            <!-- /.dropdown -->
+            {% endif %}
+                 <!-- /.dropdown -->
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                     <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
@@ -147,6 +116,7 @@
                             </li>
                         </ul>
                     </li>
+                    {% if is_granted('ROLE_ADMIN') %}
                     <li>
                         <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Administration <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
@@ -163,6 +133,7 @@
                             </li>
                         </ul>
                     </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>

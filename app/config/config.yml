@@ -97,9 +97,6 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: FS\UserBundle\Entity\User
-    registration:
-        form:
-            type: sava_user_registration
     group:
         group_class: FS\UserBundle\Entity\Group
 

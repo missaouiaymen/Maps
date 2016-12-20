@@ -14,12 +14,13 @@
                 Country List
  </h1>
             </div>
-
+            {% if is_granted('ROLE_ADMIN') %}
             <div class="col-md-12">
                 <a href="{{ path('fs_pays_addcountry') }}" class="btn btn-primary pull-right"> ADD COUNTRY</a></div>
 
 
     </div>
+        {% endif %}
 
         <div class="panel-body">
 
@@ -47,7 +48,9 @@
                         <td>{{ pays.superficie }}</td>
                          <td>
                             <a href="{{ path('fs_pays_editcountry',{id : pays.id}) }}"> <p class="fa fa-edit"></p></a>
+                             {% if is_granted('ROLE_ADMIN') %}
                             <a data-confirm="Etes-vous certain de vouloir supprimer?" href="{{ path('fs_pays_deletecountry',{id : pays.id}) }}"><p class="glyphicon glyphicon-remove"> </p></a>
+                       {% endif %}
                         </td>
                     </tr>
 

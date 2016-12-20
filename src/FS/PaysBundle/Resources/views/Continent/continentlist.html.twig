@@ -13,10 +13,12 @@
                    <h1> List Of Continents</h1>
 
             </div>
+                {% if is_granted('ROLE_ADMIN') %}
 
                 <div class="col-md-12">
                     <a href="{{ path('fs_pays_addcontinent') }}" class="btn btn-primary pull-right"> ADD Continent</a></div>
             </div>
+            {% endif %}
         </div>
 
         <div class="panel-body">
@@ -36,8 +38,10 @@
                         <td>{{ continent.nbpays }}</td>
                         <td>
                             <a href="{{ path('fs_pays_editcontinent',{id : continent.id }) }}"><p class="fa fa-edit"></p> </a>&nbsp;&nbsp;
+                            {% if is_granted('ROLE_ADMIN') %}
                             <a data-confirm="Etes-vous certain de vouloir supprimer?"href="{{ path('fs_pays_deletecontinent',{id : continent.id}) }}"><p class="glyphicon glyphicon-remove"> </p>&nbsp;&nbsp;
                             <a href="{{ path('fs_pays_addcountry',{id: continent.id }) }}"><p class="glyphicon glyphicon-plus-sign"></p> </a>
+                        {% endif %}
                         </td>
                     </tr>
 

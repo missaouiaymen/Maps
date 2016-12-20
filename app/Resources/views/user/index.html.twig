@@ -7,16 +7,22 @@
         <thead>
         <th class="text-center">USERNAME</th>
         <th class="text-center">MAIL</th>
+        <th class="text-center">Bloque</th>
+        <th class="text-center">Group</th>
+        <th class="text-center">Identifiant</th>
         <th class="text-center">ACTIONS</th>
         </thead>
         <tbody>
         {% for user in users %}
             <tr class="{% if loop.index is divisibleby(2) %}odd{% else %}even{% endif %}">
-                <td col>{{ user.username }}</td>
-                <td>{{ user.email }}</td>
-                <td>
-                    <a href="{{ path('admin_users_show', { 'id': user.id }) }}">show</a>&nbsp;
-                </td>
+                <td class="text-center">{{ user.username }}</td>
+                <td class="text-center">{{ user.email }}</td>
+                <td class="text-center"><input type="checkbox"  name="enabled" value="{{ user.enabled }}"> </td>
+                <td class="text-center">group teste</td>
+                <td class="text-center">{{ user.id }}</td>
+                <td class="text-center"><a href="{{ path('admin_users_show', { 'id': user.id }) }}">show</a>
+                    <a href="{{ path('fos_user_profile_edit', { 'id': user.id }) }}">show</a></td>
+
             </tr>
         {% endfor %}
         </tbody>
